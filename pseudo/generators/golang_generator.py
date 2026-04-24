@@ -290,53 +290,30 @@ class GolangGenerator(CodeGenerator):
     )
     
     def params(self, node, depth):
-        return ', '.join(
-            '%s %s' % (
-              self._generate_node(k),
-              self.render_type(node.pseudo_type[j + 1]))
-              for j, k in enumerate(node.params))
+        pass
 
     def dependencies(self, node, depth):
-        if len(node.dependencies) == 1:
-            return 'import "%s"' % node.dependencies[0].name
-        elif len(node.dependencies) > 1:
-            return 'import (\n\t%s\n)\n' % '\n\t'.join('"%s"' % q.name for q in node.dependencies)
-        else:
-            return ''
+        pass
 
     def element_type(self, node, _):
-        return PseudoType('').expand_type(node.pseudo_type[1], self)
+        pass
 
     def op(self, node, depth):
-        return OPS.get(node.op, node.op)
+        pass
 
     # keys in pseudo can be only string or int float bool
     def initial(self, node, _):
         '''initial value for make'''
-        return {'Int': '0', 'Float': '0.0', 'String': '""', 'Bool': 'true'}.get(node.slice_type[1], 'nil')
+        pass
 
     def zip_iterators(self, node, depth):
-        return '\n'.join(
-            '%s%s := %s' % (
-                self.offset(depth) if j else '',
-                q.name,
-                self._generate_node(
-                    Node('index',
-                        sequence=node.sequences.sequences[j],
-                        index=local('_index', 'Int'),
-                        pseudo_type=node.sequences.sequences[j].pseudo_type[1])))
-            for j, q 
-            in enumerate(node.iterators.iterators))
+        pass
 
     def placeholderz(self, node, _):
-        return ', '.join(self._generate_node(placeholder.value) for placeholder in node.args[1::2])
+        pass
 
     def index(self, node, depth):
-        return str(-node.index.value)
+        pass
 
     def return_type(self, node, depth):
-        format = self.render_type(node.return_type)
-        if isinstance(node.return_type, list) or node.return_type in self.types:
-            return format
-        else:
-            return '*%s' % format
+        pass

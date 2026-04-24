@@ -5,12 +5,7 @@ from pseudo.pseudo_tree import Node, local
 OPS = {'not': '!', 'and': '&&', 'or': '||'}
 
 def index_switch(s):
-    if isinstance(s.sequence.pseudo_type, list) and s.sequence.pseudo_type[0] == 'Tuple':
-        return 'tuple'
-    elif s.index.type != 'int' or s.index.value >= 0:
-        return 'normal'
-    else:
-        return 'z'
+    pass
 
 class CSharpGenerator(CodeGenerator):
     '''CSharp code generator'''
@@ -314,100 +309,49 @@ class CSharpGenerator(CodeGenerator):
     )
 
     def params(self, node, indent):
-        return ', '.join(
-            '%s %s' % (
-              self.render_type(node.pseudo_type[j + 1]), 
-              self._generate_node(k)) for j, k in enumerate(node.params) )
+        pass
 
     def anon_params(self, node, indent):
-        if len(node.params) == 0:
-            return ''
-        else:
-            l, r  = ('(', ')') if len(node.params) > 1 else ('', '')
-            return '%s%s%s' % (l, ', '.join(param if isinstance(param, str) else self._generate_node(param) for param in node.params), r)
+        pass
 
     def anon_block(self, node, indent):
         # print(indent);input(node.params[0].y)     
-        if indent < 2:
-            indent = 2 # anon cant be before method lvl
-
-        if len(node.block) == 1:
-            if node.block[0].type == 'implicit_return' or node.block[0].type == 'explicit_return':
-                e = node.block[0].value
-            else:
-                e = node.block[0]    
-            b = self._generate_node(e)
-            return ' ' + b
-        else:
-            b = ';\n'.join(self.offset(indent + 1) + self._generate_node(e, indent + 1) for e in node.block) + ';\n'
-            return ' {\n%s%s}' % (b, self.offset(indent))
+        pass
 
     def class_definitions(self, node, depth):
-        result = '\n'.join(self._generate_node(k) for k in node.definitions if k.type == 'class_definition')
-        if result:
-            return result + '\n'
-        else:
-            return ''
+        pass
 
     def function_definitions(self, node, depth):
-        result = '\n'.join(self.offset(1) + self._generate_node(f, 1) for f in node.definitions if f.type == 'function_definition')
-        if result:
-            return result + '\n'        
-        else:
-            return ''
+        pass
 
     def base(self, node, depth):
-        if node.base:
-            return ' : %s' % node.base
-        else:
-            return ''
+        pass
 
     def first_sequence(self, node, depth):
-        return self._generate_node(node.sequences.sequences[0])
+        pass
 
     def zip_iterators(self, node, depth):
-        return '\n'.join(
-            '%svar %s = %s;' % (
-                self.offset(depth) if j else '',
-                q.name,
-                self._generate_node(
-                    Node('index',
-                        sequence=node.sequences.sequences[j],
-                        index=local('_index', 'Int'),
-                        pseudo_type=node.sequences.sequences[j].pseudo_type[1])))
-            for j, q 
-            in enumerate(node.iterators.iterators))
+        pass
 
     def tuple_index(self, node, depth):
-        return str(node.index.value + 1)
+        pass
 
     def op(self, node, depth):
-        return OPS.get(node.op, node.op)
+        pass
 
     def char(self, node, depth):
-        if node.value == "'":
-            return "'\\''"
-        else:
-            return "'%s'" % node.value
+        pass
 
     # args starting from 0
     def comparison(self, node, depth):
-        if node.left.type != 'binary_op' or node.left.op != '+' or node.left.right.type != 'int' or node.right.type != 'int':# 'attr' or node.left.object.type != 'local' or node.left.object.name != 'ARGV':
-            pass
-        else:
-            node.right.value -= node.left.right.value
-            node.left = node.left.left
-
-        return '%s %s %s' % (self.binary_left(node, depth), node.op, self.binary_right(node, depth))
+        pass
 
     def z(self, node, depth):
-        print(node.y)
-        input()
-        return '!!!'
+        pass
 
     def index(self, node, depth):
-        return str(-node.index.value)
+        pass
 
     def placeholders(self, node, depth):
-        return ', '.join(self._generate_node(child.value) for child in node.args[1::2])
+        pass
 

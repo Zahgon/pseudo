@@ -14,7 +14,4 @@ class CppDisplayExceptionMiddleware(Middleware):
         self.tree = tree
 
     def transform__cpp_cout(self, node, in_block=False, assignment=None):
-        for j, ar in enumerate(node.args):  
-            if ar.pseudo_type == 'Exception' or ar.pseudo_type.endswith('Error'):
-                node.args[j] = method_call(ar, 'what', [], 'String')
-        return node
+        pass

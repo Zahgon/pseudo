@@ -13,10 +13,6 @@ class StandardMiddleware(Middleware):
         return cls().transform(tree)
 
     def transform_r(self, node, in_block=False, assignment=None):
-        if node.value.type == 'standard_iterable_call':
-            node.value.type = 'standard_iterable_call_return'
-            return node.value
-        else:
-            return node
+        pass
 
     transform_explicit_return = transform_implicit_return = transform_r

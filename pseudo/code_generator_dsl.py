@@ -5,8 +5,7 @@ Iterable = (list, tuple, set)
 class FragmentGenerator:
     @property
     def y(self):
-        result = yaml.dump(self)
-        return result.replace('!python/object:pseudo.code_generator_dsl.', '')
+        pass
 
     # we can't set __str__ and __repr__ because this makes yaml.dump insane :(
     # and i like yaml.dump, I don't want it to be insane, even if that's cute
@@ -136,7 +135,7 @@ class Whitespace:
 
     @property
     def y(self):
-        return repr(self)
+        pass
 
 class Newline:
     def expand(self, depth):
@@ -149,10 +148,10 @@ class Newline:
 
     @property
     def y(self):
-        return repr(self)
+        pass
 
 def internal_whitespace(count):
-    return Whitespace(count, False)
+    pass
 
 Offset = Whitespace
 INTERNAL_WHITESPACE = Whitespace(1, False)

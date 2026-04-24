@@ -6,15 +6,7 @@ def contains(receiver, element, pseudo_type):
 
 def to_py_generatorcomp(method):
     def x(receiver, test, pseudo_type):
-        return call(
-                   local(method, ['Function', test.pseudo_type, 'Boolean']),
-                   [Node('_py_generatorcomp',
-                        sequences=Node('for_sequence', sequence=receiver),
-                        iterators=Node('for_iterator', iterator=local(test.params[0].name, test.pseudo_type[1])),
-                        block=test.block[0].value,
-                        test=None,
-                        pseudo_type=['PyGenerator', 'Boolean'])],
-                    pseudo_type='Boolean')
+        pass
     return x
 
 def expand_set_slice(receiver, from_=None, to=None, value=None, pseudo_type=None):
@@ -47,23 +39,16 @@ class ReadFile(BizarreLeakingNode):
     '''
 
     def temp_name(self, target):
-        return '_file_contents'
+        pass
 
     # assign : as_assignment 
     # block-level: as_expression
     # inside: as_assignment with temp_name as target
     def as_expression(self):
-        return [Node(
-            '_py_with', 
-            call=call('open', [self.args[0], to_node('r')], 'File'),
-            context='_f', 
-            block=[method_call(local('_f', 'File'), 'read', [], 'String')],
-            pseudo_type='Void')], None
+        pass
 
     def as_assignment(self, target):
-        expression = self.as_expression()[0][0]
-        expression.block[0] = assignment(target, expression.block[0])
-        return [expression]
+        pass
 
 
 class WriteFile(NormalLeakingNode):
@@ -76,10 +61,5 @@ class WriteFile(NormalLeakingNode):
     '''
 
     def as_expression(self):
-        return [], Node(
-            '_py_with',
-            call=call('open', [self.args[0], to_node('w')], 'File'),
-            context='_f',
-            block=[method_call(local('_f', 'File'), 'write', [self.args[1]], 'Void')],
-            pseudo_type='Void')
+        pass
 

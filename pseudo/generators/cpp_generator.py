@@ -220,50 +220,23 @@ class CppGenerator(CodeGenerator):
     )
   
     def namespace(self, node, indent):
-        return self.name.capitalize()
+        pass
 
     def header(self, node, indent):
-        return 'using System;\nnamespace %s;\n{\n' % self.namespace()
+        pass
 
     def params(self, node, indent):
-        return ', '.join(
-            '%s %s' % (
-              PseudoType('').expand_type(k.pseudo_type, self),
-              k.name) for j, k in enumerate(node.params) )
+        pass
 
     def anon_block(self, node, indent):
-        if len(node.block) == 1:
-            b = self._generate_node(node.block[0])
-            return '{ %s; }' % b
-        else:
-            b = ';\n'.join(self.offset(indent + 1) + self._generate_node(e, indent + 1) for e in node.block) + ';'
-            return '{\n%s\n%s}' % (b, self.offset(indent))
+        pass
 
   
     def exception_dependencies(self, node, indent):
-        if node.custom_exceptions:
-            iostream = ''
-            for d in node.dependencies:
-                if d.name == 'iostream':
-                    break
-            else:
-                iostream = '#include<iostream>\n'
-            return '%s#include<stdexcept>\n#include<exception>\n' % iostream
-        else:
-          return ''
+        pass
 
     def zip_iterators(self, node, depth):
-        return '\n'.join(
-            '%sauto %s = %s;' % (
-                self.offset(depth) if j else '',
-                q.name,
-                self._generate_node(
-                    Node('index',
-                        sequence=node.sequences.sequences[j],
-                        index=local('_index', 'Int'),
-                        pseudo_type=node.sequences.sequences[j].pseudo_type[1])))
-            for j, q 
-            in enumerate(node.iterators.iterators))
+        pass
 
     def first_sequence(self, node, depth):
-        return self._generate_node(node.sequences.sequences[0])
+        pass

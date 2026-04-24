@@ -240,48 +240,19 @@ class PythonGenerator(CodeGenerator):
     )
     
     def to_boolean(self, node, indent):
-        if node.value == 'true':
-            return 'True'
-        else:
-            return 'False'
+        pass
 
     def block(self, node, indent):
-        if node.block:
-            e = self._generate_node(node.block[0])
-            other = [self.offset(indent) + self._generate_node(n, indent) for n in node.block[1:]]
-            return '\n'.join([e] + other)
-        else:
-            return 'pass'
+        pass
 
     def anonymous_function(self, node, indent):
-        params = ', '.join(map(self._generate_node, node.params))
-        lambda_head = 'lambda%s:' % (' ' + params if params else '')
-        if not node.block:
-            return '%s pass' % lambda_head
-        elif len(node.block) == 1 and node.block[0].type in EXPRESSION_TYPES:
-            if node.block[0].type == 'implicit_return' or node.block[0].type == 'explicit_return':
-                block = node.block[0].value
-            else:
-                block = node.block[0]
-            return '%s %s' % (lambda_head, self._generate_node(block))
-        else:
-            name = 'a_%d' % len(self.a)
-            block = [self.offset(1) + self._generate_node(z) for z in node.block]
-            code = 'def %s(%s):\n%s\n' % (name, params, '\n'.join(block))
-            self.a.append(code)
-            return name
+        pass
 
     def class_pass(self, node, indent):
-        if not node.constructor and not node.methods:
-            return 'pass'
-        else:
-            return ''
+        pass
 
     def test(self, node, indent):
-        if node.test:
-            return ' if %s' % self._generate_node(node.test)
-        else:
-            return ''
+        pass
 
     def placeholders(self, node, indent):
-        return ', '.join(self._generate_node(placeholder.value) for placeholder in node.args[1::2])
+        pass

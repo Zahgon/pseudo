@@ -69,22 +69,7 @@ def generate_main(main, language):
     'a';
     0;
     '''
-    base = {'type': 'module', 'custom_exceptions': [], 'definitions': [], 'constants': [], 'main': [], 'pseudo_type': 'Void'}
-    base_node = pseudo.loader.convert_to_syntax_tree(base)
-    if isinstance(main, dict):
-        base['main'] = [main]
-    elif isinstance(main, list):
-        if main and isinstance(main[0], dict):
-            base['main'] = main
-        else:
-            base_node.main = main
-    elif isinstance(main, pseudo.pseudo_tree.Node):
-        base_node.main = [main]
-    if base['main']:
-        q = pseudo.loader.convert_to_syntax_tree(base)
-    else:
-        q = base_node
-    return generate(q, language)
+    pass
 
 def generate_from_yaml(pseudo_ast, language):
     '''

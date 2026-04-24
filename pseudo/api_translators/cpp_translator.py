@@ -88,13 +88,13 @@ class CppTranslator(ApiTranslator):
     }
 
     def begin_placeholder(self, receiver, *args, equivalent):
-        return method_call(receiver, 'begin', [], 'CppIterator')
+        pass
 
     def end_placeholder(self, receiver, *args, equivalent):
-        return method_call(receiver, 'end', [], 'CppIterator')
+        pass
 
     def new_placeholder(self, receiver, *args, equivalent):
-        return Node('new_instance', class_name=equivalent, args=[], pseudo_type=equivalent)
+        pass
 
 
 '''

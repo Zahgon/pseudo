@@ -23,16 +23,7 @@ def expand_slice(receiver, from_=None, to=None, pseudo_type=None):
 
 def to_method_rb_block(name):
     def l(receiver, *args):
-        f, *args, pseudo_type = args
-        return Node('_rb_method_call_block',
-                    receiver=receiver,
-                    message=name,
-                    args=args,
-                    block=Node('_rb_block',
-                        params=f.params,
-                        block=f.block,
-                        pseudo_type=f.pseudo_type),
-                    pseudo_type=pseudo_type)
+        pass
     return l
 
 

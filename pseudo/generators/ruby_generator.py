@@ -14,15 +14,7 @@ class RubyGenerator(CodeGenerator):
     middlewares = []
 
     def ruby_dict(self, node, indent):
-        short_syntax = True
-        result = []
-        for pair in node.pairs:
-            if short_syntax and pair.key.type == 'string' and re.match(SHORT_SYNTAX, pair.key.value):
-                result.append('%s: %s' % (pair.key.value, self._generate_node(pair.value)))
-            else:
-                short_syntax = False
-                result.append('%s => %s' % (self._generate_node(pair.key), self._generate_node(pair.value)))
-        return ', '.join(result)
+        pass
 
     call_args = ("(%<args:join ', '>)", '')
     function_params = ("(%<params:join ', '>)", '')
@@ -242,15 +234,8 @@ class RubyGenerator(CodeGenerator):
     )
     
     def op(self, node, depth):
-        return OPS.get(node.op, node.op)
+        pass
 
     def right(self, node, depth):
         '''when compared with argv length, decrement'''
-        if node.left.type != 'binary_op' or node.left.op != '+' or node.left.right.type != 'int' or node.right.type != 'int':# 'attr' or node.left.object.type != 'local' or node.left.object.name != 'ARGV':
-        #     print('woah')
-            pass
-        else:
-            node.right.value -= node.left.right.value
-            node.left = node.left.left
-
-        return '%s %s %s' % (self.binary_left(node, depth), node.op, self.binary_right(node, depth))
+        pass

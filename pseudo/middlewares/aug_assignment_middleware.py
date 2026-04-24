@@ -12,11 +12,5 @@ class AugAssignmentMiddleware(Middleware):
         return cls().transform(tree)
 
     def transform_assignment(self, node, in_block=False, assignment=None):
-        if node.value.type == 'binary_op' and node.target == node.value.left:
-            return Node('aug_assignment', 
-                        op=node.value.op,
-                        target=node.target,
-                        value=node.value.right)
-        else:
-            return node
+        pass
 

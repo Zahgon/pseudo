@@ -46,15 +46,7 @@ def split(f, delimiter, pseudo_type):
 
 def linq(name, z=True, swap=False):
     def x(l, f, *args):
-        pseudo_type, args = args[-1], list(args[:-1])
-        if args and swap:
-            f, args[0] = args[0], f
-        cs = method_call(l, name, [f] + args, pseudo_type)
-        if z:
-            cs.pseudo_type = 'CSharpEnumerable'
-            return method_call(cs, 'ToList', [], pseudo_type)
-        else:
-            return cs
+        pass
     return x
 
 def pad(f, count, fill, pseudo_type):
@@ -95,13 +87,7 @@ def expand_slice(receiver, from_, to, pseudo_type=None):
 
 class Display(NormalLeakingNode):
     def as_expression(self):
-        return [Node('static_call',
-                    receiver=typename('Console', 'Library'),
-                    message='WriteLine',
-                    args=[arg],
-                    pseudo_type='Void')
-                for arg
-                in self.args], None
+        pass
 
 
 def empty(l, _):
